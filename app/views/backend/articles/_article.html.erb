@@ -1,0 +1,5 @@
+<h4><%= article.title %></h4>
+<div><%= article.content %></div>
+
+<%= link_to "edit", edit_backend_article_path(article) %>
+<%= link_to "delete", backend_article_path(article), method: :delete %>
