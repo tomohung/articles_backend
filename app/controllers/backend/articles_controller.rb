@@ -4,18 +4,17 @@ class Backend::ArticlesController < ApplicationController
   before_action :get_article, only: [:show, :edit, :update, :destroy]
 
   def index
-    @articles = Article.all
+    @articles = Backend::Article.all
   end
 
   def new
-    @article = Article.new
-    @action_path = backend_articles_path
+    @article = Backend::Article.new
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = Backend::Article.new(article_params)
     if @article.save
-      redirect_to article_path(@article)
+      redirect_to backend_article_path(@article)
     else
       render :new
     end
@@ -25,7 +24,6 @@ class Backend::ArticlesController < ApplicationController
   end
 
   def edit
-    @action_path = edit_backend_article_path(@article)
   end
 
   def update
@@ -43,11 +41,11 @@ class Backend::ArticlesController < ApplicationController
 
   private
     def get_article
-      @article = Article.find_by(params[:id])
+      @article = Backend::Article.find(params[:id])
     end
 
     def article_params
-      params.require(:article).permit(:title, :content)
+      params.require(:backend_article).permit(:title, :content)
     end
 
 end
